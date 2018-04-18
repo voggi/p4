@@ -17,7 +17,7 @@ Pivot table(s):
 *Describe what action I need take in order to see an example of all 4 CRUD operations in your app. I've filled this out with examples from the Foobooks app - delete this and replace with your own info. If one operation is performed multiple times (e.g. Read), you only need to provide 1 example.*
 
 __Create__
-  + Visit <http://p4.bookrunner.de/create>
+  + Visit <http://p4.bookrunner.de>
   + Fill out form
   + Click *Add new book*
   + Observe confirmation message
