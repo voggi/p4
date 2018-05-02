@@ -37,7 +37,8 @@ __Delete__
   + Observe confirmation message
 
 ## Outside resources
-*Your list of outside resources go here*
+  + Laravel master layout file app.blade.php
+  + Dropzone stylesheet
 
 ## Code style divergences
 *List any divergences from PSR-1/PSR-2 and course guidelines on code style*
