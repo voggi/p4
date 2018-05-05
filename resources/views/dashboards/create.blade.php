@@ -22,7 +22,7 @@
                         @include('modules.error-field', ['field' => 'name'])
                     </div>
 
-                    <button type="submit" class="btn btn-outline-primary">Create</button>
+                    <button type="submit" class="btn btn-outline-primary">Save <i class="fas fa-cloud-upload-alt"></i></button>
                 </form>
             </div>
         </div>
