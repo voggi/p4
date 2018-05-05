@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use App\Dashboard;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -24,9 +25,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-
-        $dashboards = null; //$user->dashboards;
+        $dashboards = Dashboard::usersDashboards();
 
         return view('dashboards.index', compact('dashboards'));
     }
@@ -38,7 +37,9 @@ class DashboardController extends Controller
      */
     public function create()
     {
-        //
+        $dashboards = Dashboard::usersDashboards();
+
+        return view('dashboards.create', compact('dashboards'));
     }
 
     /**
@@ -49,29 +50,45 @@ class DashboardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+
+        $dashboard = new Dashboard();
+
+        $dashboard->name = $request->name;
+
+        $dashboard->user()->associate(Auth::user());
+
+        $dashboard->save();
+
+        return redirect('/dashboards')->with(['You added' . $dashboard->name . ' to your dashboards. You can now add charts to it.']);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Dashboard  $dashboard
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Dashboard $dashboard)
     {
-        //
+        $dashboards = Dashboard::usersDashboards();
+
+        return view('dashboards.show', compact('dashboards', 'dashboard'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Dashboard  $dashboard
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Dashboard $dashboard)
     {
-        //
+        $dashboards = Dashboard::usersDashboards();
+
+        return view('dashboards.edit', compact('dashboards', 'dashboard'));
     }
 
     /**
@@ -87,13 +104,30 @@ class DashboardController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Show the form for deleting the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Dashboard  $dashboard
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete(Dashboard $dashboard)
     {
-        //
+        $dashboards = Dashboard::usersDashboards();
+
+        return view('dashboards.delete', compact('dashboards', 'dashboard'));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Dashboard  $dashboard
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Dashboard $dashboard)
+    {
+        $name = $dashboard->name;
+
+        $dashboard->delete();
+
+        return redirect('/dashboards')->with(['You removed the dashboard ' . $name . '.']);
     }
 }

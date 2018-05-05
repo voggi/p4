@@ -19,4 +19,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/dashboards', 'DashboardController@index');
+Route::get('/dashboards/{dashboard}/delete', 'DashboardController@delete');
+Route::resource('/dashboards', 'DashboardController');

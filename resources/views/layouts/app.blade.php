@@ -27,8 +27,6 @@
         </header>
 
         <main>
-            @include('modules.tabs')
-
             @yield('content')
         </main>
 

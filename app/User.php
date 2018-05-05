@@ -26,4 +26,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Get the dashboard models that are associated with the user.
+     */
+    public function dashboards()
+    {
+        return $this->hasMany('App\Dashboard');
+    }
 }
