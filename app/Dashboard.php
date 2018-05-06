@@ -28,4 +28,12 @@ class Dashboard extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    /**
+     * Get the reports that are associated with the dashboard.
+     */
+    public function reports()
+    {
+        return $this->belongsToMany('App\Report')->withTimestamps();
+    }
 }

@@ -11,7 +11,7 @@
                 @endif
 
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::is('dashboards*') ? 'active' : '' }}" href="{{ url('dashboards') }}">Manage</a>
+                    <a class="nav-link {{ request_is_not_show() ? 'active' : '' }}" href="{{ url('dashboards') }}">Manage</a>
                 </li>
             </ul>
         </div>

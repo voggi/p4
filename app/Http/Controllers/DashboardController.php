@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use App\Report;
 use App\Dashboard;
 use Illuminate\Http\Request;
 
@@ -62,7 +63,7 @@ class DashboardController extends Controller
 
         $dashboard->save();
 
-        return redirect('/dashboards')->with(['You added' . $dashboard->name . ' to your dashboards. You can now add charts to it.']);
+        return redirect('/dashboards')->with(['You added' . $dashboard->name . ' to your dashboards. Click on Edit to select reports for it.']);
     }
 
     /**
@@ -88,19 +89,33 @@ class DashboardController extends Controller
     {
         $dashboards = Dashboard::usersDashboards();
 
-        return view('dashboards.edit', compact('dashboards', 'dashboard'));
+        $reports = Report::all();
+
+        $selectedReports = $dashboard->reports()->pluck('reports.id')->toArray();
+
+        return view('dashboards.edit', compact('dashboards', 'reports', 'selectedReports', 'dashboard'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Dashboard  $dashboard
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Dashboard $dashboard)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+
+        $dashboard->name = $request->name;
+
+        $dashboard->reports()->sync($request->input('selection'));
+
+        $dashboard->save();
+
+        return redirect('/dashboards')->with(['Your changes to ' . $dashboard->name . ' were saved.']);
     }
 
     /**
@@ -125,6 +140,8 @@ class DashboardController extends Controller
     public function destroy(Dashboard $dashboard)
     {
         $name = $dashboard->name;
+
+        $dashboard->reports()->detach();
 
         $dashboard->delete();
 

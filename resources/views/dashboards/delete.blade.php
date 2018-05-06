@@ -11,7 +11,7 @@
                     {{ csrf_field() }}
 
                     <div class="form-group text-center">
-                        <button type="submit" class="btn btn-outline-danger">Yes - Remove the Below Dashboard <i class="fas fa-trash-alt"></i></button>
+                        <button type="submit" class="btn btn-outline-danger">Remove the "{{ $dashboard->name }}" Dashboard <i class="fas fa-trash-alt"></i></button>
 
                         <a href="/dashboards" class="btn btn-outline-secondary">Cancel <i class="fas fa-chevron-left"></i></a>
                     </div>
