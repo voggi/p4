@@ -1,5 +1,4 @@
 <script>
-      import numeral from 'numeral';
       import Chart from './Chart.vue';
       import Colors from '../classes/Colors.js';
 
@@ -8,20 +7,20 @@
 
             computed: {
                   data() {
+                        let colors = new Colors();
+
                         return {
+                              labels: ['YtD', 'April', 'March', 'February', 'January'],
                               datasets: [{
-                                    data: [10, 20, 30, 40, 50, 60]
-                              }],
-                              labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+                                    label: '2018',
+                                    backgroundColor: colors.next(),
+                                    data: [-1, 1, -3, -2, 3]
+                              }, {
+                                    label: '2017',
+                                    backgroundColor: colors.next(),
+                                    data: [6, 1, 0, 3, 2]
+                              }]
                         };
-                  },
-
-                  labels() {
-                        return ['Pension Fund I']; 
-                  },
-
-                  datasets() {
-                        return [2200, 2700, 500];
                   },
 
                   type() {
@@ -30,12 +29,18 @@
 
                   options() {
                         return {
-                              scales: {
-                                    xAxes: [{
-                                        type: 'category',
-                                        labels: ['Assets', 'Liabilities', 'Provisions'],
-                                    }]
-                                }
+                              title: {
+                                    display: true,
+                                    text: 'Asset Performance'
+                              },
+                              tooltips: {
+                                    mode: 'index',
+                                    intersect: false
+                              },
+                              responsive: true,
+                              legend: {
+                                    position: 'bottom'
+                              }
                         };
                   },
 

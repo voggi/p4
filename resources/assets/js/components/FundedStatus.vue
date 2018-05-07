@@ -1,5 +1,4 @@
 <script>
-      import numeral from 'numeral';
       import Chart from './Chart.vue';
       import Colors from '../classes/Colors.js';
 
@@ -8,20 +7,45 @@
 
             computed: {
                   data() {
+                        let colors = new Colors();
+                        let dboColor = colors.next()
+                        let provisionsColor = colors.next();
+                        let assetColor = colors.next();
+
                         return {
+                              labels: ['DBO', 'Assets / Provisions'],
                               datasets: [{
-                                    data: [10, 20, 30, 40, 50, 60]
-                              }],
-                              labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+                                    label: 'DBO',
+                                    backgroundColor: dboColor,
+                                    stack: '2018',
+                                    data: [2700, 0]
+                              }, {
+                                    label: 'Provisions',
+                                    stack: '2018',
+                                    backgroundColor: provisionsColor,
+                                    data: [0, 500]
+                              }, {
+                                    label: 'Assets',
+                                    stack: '2018',
+                                    backgroundColor: assetColor,
+                                    data: [0, 2200]
+                              }, {
+                                    label: 'DBO',
+                                    backgroundColor: dboColor,
+                                    stack: '2017',
+                                    data: [3200, 0]
+                              }, {
+                                    label: 'Provisions',
+                                    stack: '2017',
+                                    backgroundColor: provisionsColor,
+                                    data: [0, 1000]
+                              }, {
+                                    label: 'Assets',
+                                    stack: '2017',
+                                    backgroundColor: assetColor,
+                                    data: [0, 2200]
+                              }]
                         };
-                  },
-
-                  labels() {
-                        return ['Pension Fund I']; 
-                  },
-
-                  datasets() {
-                        return [2200, 2700, 500];
                   },
 
                   type() {
@@ -30,12 +54,26 @@
 
                   options() {
                         return {
+                              title: {
+                                    display: true,
+                                    text: 'Funded Status'
+                              },
+                              tooltips: {
+                                    mode: 'index',
+                                    intersect: false
+                              },
+                              responsive: true,
                               scales: {
                                     xAxes: [{
-                                        type: 'category',
-                                        labels: ['Assets', 'Liabilities', 'Provisions'],
+                                          stacked: true,
+                                    }],
+                                    yAxes: [{
+                                          stacked: true
                                     }]
-                                }
+                              },
+                              legend: {
+                                    position: 'bottom'
+                              }
                         };
                   },
 

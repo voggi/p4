@@ -1,5 +1,4 @@
 <script>
-      import numeral from 'numeral';
       import Chart from './Chart.vue';
       import Colors from '../classes/Colors.js';
 
@@ -8,34 +7,41 @@
 
             computed: {
                   data() {
+                        let colors = new Colors();
+                        let backgroundColors = [colors.next(), colors.next(), colors.next(), colors.next()];
+
                         return {
+                              labels: ['Equity', 'Credit', 'Rates', 'Illiquid'],
                               datasets: [{
-                                    data: [10, 20, 30, 40, 50, 60]
-                              }],
-                              labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+                                    label: '2018',
+                                    backgroundColor: backgroundColors,
+                                    data: [35, 35, 15, 15]
+                              }, {
+                                    label: '2017',
+                                    backgroundColor: backgroundColors,
+                                    data: [30, 40, 20, 10]
+                              }]
                         };
                   },
 
-                  labels() {
-                        return ['Pension Fund I']; 
-                  },
-
-                  datasets() {
-                        return [2200, 2700, 500];
-                  },
-
                   type() {
-                        return 'bar';
+                        return 'pie';
                   },
 
                   options() {
                         return {
-                              scales: {
-                                    xAxes: [{
-                                        type: 'category',
-                                        labels: ['Assets', 'Liabilities', 'Provisions'],
-                                    }]
-                                }
+                              title: {
+                                    display: true,
+                                    text: 'Asset Allocation'
+                              },
+                              tooltips: {
+                                    mode: 'index',
+                                    intersect: false
+                              },
+                              responsive: true,
+                              legend: {
+                                    position: 'bottom'
+                              }
                         };
                   },
 

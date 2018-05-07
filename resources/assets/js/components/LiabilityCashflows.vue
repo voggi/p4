@@ -1,5 +1,4 @@
 <script>
-      import numeral from 'numeral';
       import Chart from './Chart.vue';
       import Colors from '../classes/Colors.js';
 
@@ -8,20 +7,24 @@
 
             computed: {
                   data() {
+                        let colors = new Colors();
+
                         return {
+                              labels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026', '2027'],
                               datasets: [{
-                                    data: [10, 20, 30, 40, 50, 60]
-                              }],
-                              labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+                                    label: 'Pensioners',
+                                    backgroundColor: colors.next(),
+                                    data: [10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+                              }, {
+                                    label: 'Deferreds',
+                                    backgroundColor: colors.next(),
+                                    data: [2, 2, 2, 3, 3, 3, 3, 3, 4, 4]
+                              }, {
+                                    label: 'Actives',
+                                    backgroundColor: colors.next(),
+                                    data: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+                              }]
                         };
-                  },
-
-                  labels() {
-                        return ['Pension Fund I']; 
-                  },
-
-                  datasets() {
-                        return [2200, 2700, 500];
                   },
 
                   type() {
@@ -30,12 +33,26 @@
 
                   options() {
                         return {
+                              title: {
+                                    display: true,
+                                    text: 'Liability Cashflows'
+                              },
+                              tooltips: {
+                                    mode: 'index',
+                                    intersect: false
+                              },
+                              responsive: true,
                               scales: {
                                     xAxes: [{
-                                        type: 'category',
-                                        labels: ['Assets', 'Liabilities', 'Provisions'],
+                                          stacked: true,
+                                    }],
+                                    yAxes: [{
+                                          stacked: true
                                     }]
-                                }
+                              },
+                              legend: {
+                                    position: 'bottom'
+                              }
                         };
                   },
 

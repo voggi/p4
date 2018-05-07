@@ -1,5 +1,4 @@
 <script>
-      import numeral from 'numeral';
       import Chart from './Chart.vue';
       import Colors from '../classes/Colors.js';
 
@@ -8,20 +7,39 @@
 
             computed: {
                   data() {
+                        let colors = new Colors();
+
                         return {
+                              labels: ['YtD', 'April', 'March', 'February', 'January'],
                               datasets: [{
-                                    data: [10, 20, 30, 40, 50, 60]
-                              }],
-                              labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+                                    label: 'Total',
+                                    type: 'line',
+                                    fill: false,
+                                    borderColor: colors.next(),
+                                    borderWidth: 2,
+                                    data: [2, 1, -3, -5, 2]
+                              }, {
+                                    label: 'Equity',
+                                    type: 'bar',
+                                    backgroundColor: colors.next(),
+                                    data: [1, 2, -4, -5, 1]
+                              }, {
+                                    label: 'Credit',
+                                    type: 'bar',
+                                    backgroundColor: colors.next(),
+                                    data: [1, 0, -1, -2, 1]
+                              }, {
+                                    label: 'Rates',
+                                    type: 'bar',
+                                    backgroundColor: colors.next(),
+                                    data: [-1, -2, 1, 2, -2]
+                              }, {
+                                    label: 'Illiquid',
+                                    type: 'bar',
+                                    backgroundColor: colors.next(),
+                                    data: [1, 1, 1, 0, 2]
+                              }]
                         };
-                  },
-
-                  labels() {
-                        return ['Pension Fund I']; 
-                  },
-
-                  datasets() {
-                        return [2200, 2700, 500];
                   },
 
                   type() {
@@ -30,12 +48,26 @@
 
                   options() {
                         return {
+                              title: {
+                                    display: true,
+                                    text: 'Return Attribution'
+                              },
+                              tooltips: {
+                                    mode: 'index',
+                                    intersect: false
+                              },
+                              responsive: true,
                               scales: {
                                     xAxes: [{
-                                        type: 'category',
-                                        labels: ['Assets', 'Liabilities', 'Provisions'],
+                                          stacked: true,
+                                    }],
+                                    yAxes: [{
+                                          stacked: true
                                     }]
-                                }
+                              },
+                              legend: {
+                                    position: 'bottom'
+                              }
                         };
                   },
 

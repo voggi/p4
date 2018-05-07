@@ -1,5 +1,4 @@
 <script>
-      import numeral from 'numeral';
       import Chart from './Chart.vue';
       import Colors from '../classes/Colors.js';
 
@@ -8,34 +7,41 @@
 
             computed: {
                   data() {
+                        let colors = new Colors();
+                        let backgroundColors = [colors.next(), colors.next()];
+
                         return {
+                              labels: ['Funded', 'Gap'],
                               datasets: [{
-                                    data: [10, 20, 30, 40, 50, 60]
-                              }],
-                              labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+                                    label: '2018',
+                                    backgroundColor: backgroundColors,
+                                    data: [77, 23]
+                              }, {
+                                    label: '2017',
+                                    backgroundColor: backgroundColors,
+                                    data: [69, 31]
+                              }]
                         };
                   },
 
-                  labels() {
-                        return ['Pension Fund I']; 
-                  },
-
-                  datasets() {
-                        return [2200, 2700, 500];
-                  },
-
                   type() {
-                        return 'bar';
+                        return 'doughnut';
                   },
 
                   options() {
                         return {
-                              scales: {
-                                    xAxes: [{
-                                        type: 'category',
-                                        labels: ['Assets', 'Liabilities', 'Provisions'],
-                                    }]
-                                }
+                              responsive: true,
+                              legend: {
+                                    position: 'bottom',
+                              },
+                              title: {
+                                    display: true,
+                                    text: 'Funding Ratio'
+                              },
+                              animation: {
+                                    animateScale: true,
+                                    animateRotate: true
+                              }
                         };
                   },
 
