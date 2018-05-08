@@ -5,7 +5,7 @@
     
     <div class="container">
         <div class="row py-2 justify-content-center">
-            <div class="col-10">
+            <div class="col-10 col-sm-12">
                 <form method="POST" action="/dashboards/{{ $dashboard->id }}">
                     {{ method_field('put') }}
                     {{ csrf_field() }}

@@ -7,14 +7,14 @@
 
     <div class="container">
         <div class="row py-2 justify-content-center">
-            <div class="col-10">
+            <div class="col-10 col-sm-12">
                 <a href="{{ url('dashboards/create') }}" class="btn btn-outline-primary btn-block">Add a New Dashboard <i class="fas fa-plus"></i></a>
             </div>
         </div>
 
         @foreach($dashboards as $link => $dashboard)
             <div class="row py-2 justify-content-center">
-                <div class="col-10">
+                <div class="col-10 col-sm-12">
                     <div class="card text-center">
                         <div class="card-header">
                             <a href="{{ url($link) }}">{{ $dashboard->name }} <i class="fas fa-chevron-right"></i></a>
