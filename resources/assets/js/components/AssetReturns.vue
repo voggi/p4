@@ -10,19 +10,15 @@
                 let colors = new Colors();
 
                 return {
-                    labels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026', '2027'],
+                    labels: ['YtD', 'April', 'March', 'February', 'January'],
                     datasets: [{
-                        label: 'Pensioners',
+                        label: '2018',
                         backgroundColor: colors.next(),
-                        data: [10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+                        data: [-1, 1, -3, -2, 3]
                     }, {
-                        label: 'Deferreds',
+                        label: '2017',
                         backgroundColor: colors.next(),
-                        data: [2, 2, 2, 3, 3, 3, 3, 3, 4, 4]
-                    }, {
-                        label: 'Actives',
-                        backgroundColor: colors.next(),
-                        data: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+                        data: [6, 1, 0, 3, 2]
                     }]
                 };
             },
@@ -35,21 +31,13 @@
                 return {
                     title: {
                         display: true,
-                        text: 'Liability Cashflows'
+                        text: 'Asset Performance'
                     },
                     tooltips: {
                         mode: 'index',
                         intersect: false
                     },
                     responsive: true,
-                    scales: {
-                        xAxes: [{
-                            stacked: true,
-                        }],
-                        yAxes: [{
-                            stacked: true
-                        }]
-                    },
                     legend: {
                         position: 'bottom'
                     }

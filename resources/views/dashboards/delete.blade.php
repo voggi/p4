@@ -5,7 +5,7 @@
 
     <div class="container">
         <div class="row py-2 justify-content-center">
-            <div class="col-8">
+            <div class="col-10">
                 <form method="POST" action="/dashboards/{{ $dashboard->id }}">
                     {{ method_field('delete') }}
                     {{ csrf_field() }}
@@ -20,14 +20,18 @@
         </div>
 
         <div class="row py-2 justify-content-center">
-            <div class="col-8">
+            <div class="col-10">
                 <div class="card text-center">
                     <div class="card-header">
                         {{ $dashboard->name }}
                     </div>
 
                     <div class="card-body">
-                        A list of charts will go here ...
+                        @if ($dashboard->reports->count() > 0)
+                            @include('modules.report-cards', ['reports' => $dashboard->reports])
+                        @else
+                            <p>The dashboard is empty.</p>
+                        @endif
                     </div>
                 </div>
             </div>

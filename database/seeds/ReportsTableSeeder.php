@@ -15,7 +15,7 @@ class ReportsTableSeeder extends Seeder
 
         App\Report::updateOrCreate(['name' => 'Funding Ratio']);
 
-        App\Report::updateOrCreate(['name' => 'Asset Performance']);
+        App\Report::updateOrCreate(['name' => 'Asset Returns']);
 
         App\Report::updateOrCreate(['name' => 'Asset Allocation']);
 

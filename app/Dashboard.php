@@ -14,7 +14,7 @@ class Dashboard extends Model
     {
         $result = [];
 
-        foreach (Auth::user()->dashboards as $dashboard) {
+        foreach (Auth::user()->dashboards->load('reports') as $dashboard) {
             $result['dashboards/' . $dashboard->id] = $dashboard;
         }
 

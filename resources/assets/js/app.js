@@ -18,7 +18,7 @@ window.Vue = require('vue');
 Vue.component('chart', require('./components/Chart.vue'));
 Vue.component('funded_status', require('./components/FundedStatus.vue'));
 Vue.component('funding_ratio', require('./components/FundingRatio.vue'));
-Vue.component('asset_performance', require('./components/AssetPerformance.vue'));
+Vue.component('asset_returns', require('./components/AssetReturns.vue'));
 Vue.component('asset_allocation', require('./components/AssetAllocation.vue'));
 Vue.component('return_attribution', require('./components/ReturnAttribution.vue'));
 Vue.component('liability_cashflows', require('./components/LiabilityCashflows.vue'));

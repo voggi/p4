@@ -63,7 +63,9 @@ class DashboardController extends Controller
 
         $dashboard->save();
 
-        return redirect('/dashboards')->with(['You added' . $dashboard->name . ' to your dashboards. Click on Edit to select reports for it.']);
+        return redirect('/dashboards')->with([
+            'alert' => 'You successfully added ' . $dashboard->name . ' to your list of dashboards.'
+        ]);
     }
 
     /**
@@ -74,9 +76,13 @@ class DashboardController extends Controller
      */
     public function show(Dashboard $dashboard)
     {
-        $dashboards = Dashboard::usersDashboards();
+        if (Auth::user()->can('view', $dashboard)) {
+            $dashboards = Dashboard::usersDashboards();
 
-        return view('dashboards.show', compact('dashboards', 'dashboard'));
+            return view('dashboards.show', compact('dashboards', 'dashboard'));
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
     }
 
     /**
@@ -87,13 +93,17 @@ class DashboardController extends Controller
      */
     public function edit(Dashboard $dashboard)
     {
-        $dashboards = Dashboard::usersDashboards();
+        if (Auth::user()->can('update', $dashboard)) {
+            $dashboards = Dashboard::usersDashboards();
 
-        $reports = Report::all();
+            $reports = Report::all();
 
-        $selectedReports = $dashboard->reports()->pluck('reports.id')->toArray();
+            $selectedReports = $dashboard->reports()->pluck('reports.id')->toArray();
 
-        return view('dashboards.edit', compact('dashboards', 'reports', 'selectedReports', 'dashboard'));
+            return view('dashboards.edit', compact('dashboards', 'reports', 'selectedReports', 'dashboard'));
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
     }
 
     /**
@@ -105,17 +115,23 @@ class DashboardController extends Controller
      */
     public function update(Request $request, Dashboard $dashboard)
     {
-        $this->validate($request, [
-            'name' => 'required',
-        ]);
+        if (Auth::user()->can('update', $dashboard)) {
+            $this->validate($request, [
+                'name' => 'required',
+            ]);
 
-        $dashboard->name = $request->name;
+            $dashboard->name = $request->name;
 
-        $dashboard->reports()->sync($request->input('selection'));
+            $dashboard->reports()->sync($request->input('selection'));
 
-        $dashboard->save();
+            $dashboard->save();
 
-        return redirect('/dashboards')->with(['Your changes to ' . $dashboard->name . ' were saved.']);
+            return redirect('/dashboards')->with([
+                'alert' => 'Your changes to the dashboard ' . $dashboard->name . ' were successfully saved.'
+            ]);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
     }
 
     /**
@@ -126,9 +142,13 @@ class DashboardController extends Controller
      */
     public function delete(Dashboard $dashboard)
     {
-        $dashboards = Dashboard::usersDashboards();
+        if (Auth::user()->can('delete', $dashboard)) {
+            $dashboards = Dashboard::usersDashboards();
 
-        return view('dashboards.delete', compact('dashboards', 'dashboard'));
+            return view('dashboards.delete', compact('dashboards', 'dashboard'));
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
     }
 
     /**
@@ -139,12 +159,18 @@ class DashboardController extends Controller
      */
     public function destroy(Dashboard $dashboard)
     {
-        $name = $dashboard->name;
+        if (Auth::user()->can('delete', $dashboard)) {
+            $name = $dashboard->name;
 
-        $dashboard->reports()->detach();
+            $dashboard->reports()->detach();
 
-        $dashboard->delete();
+            $dashboard->delete();
 
-        return redirect('/dashboards')->with(['You removed the dashboard ' . $name . '.']);
+            return redirect('/dashboards')->with([
+                'alert' => 'You successfully removed ' . $name . ' from your list of dashboards.'
+            ]);
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
     }
 }
