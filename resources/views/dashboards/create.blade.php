@@ -5,7 +5,7 @@
     
     <div class="container">
         <div class="row py-2 justify-content-center">
-            <div class="col-10 col-sm-12">
+            <div class="col-12 col-md-10">
                 <form method="POST" action="/dashboards">
                     {{ csrf_field() }}
 

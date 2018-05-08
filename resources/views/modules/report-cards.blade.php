@@ -1,6 +1,6 @@
 <div class="row justify-content-center">
     @foreach($reports as $report)
-        <div class="col-2 col-sm-6">
+        <div class="col-6 col-md-2">
             <div class="card h-100">
                 <img class="card-img-top"
                      src="{{ '/images/' . snake_case($report->name) . '.png' }}"

@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row py-4 justify-content-center">
-        <div class="col-10 col-sm-12">
+        <div class="col-12 col-md-10">
             <ul class="nav nav-tabs justify-content-center">
                 @if($dashboards)
                     @foreach($dashboards as $link => $dashboard)

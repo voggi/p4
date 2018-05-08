@@ -5,7 +5,7 @@
     
     <div class="container">
         <div class="row py-2 justify-content-center">
-            <div class="col-10 col-sm-12">
+            <div class="col-12 col-md-10">
                 <div class="row justify-content-center">
                     @if ($dashboard->reports->count() > 0)
                         @foreach($dashboard->reports as $report)
