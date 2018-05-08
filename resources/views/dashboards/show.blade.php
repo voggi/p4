@@ -9,7 +9,7 @@
                 <div class="row justify-content-center">
                     @if ($dashboard->reports->count() > 0)
                         @foreach($dashboard->reports as $report)
-                            <div class="col-6 col-sm-12">
+                            <div class="col-12 col-md-6">
                                 <{{ snake_case($report->name) }}></{{ snake_case($report->name) }}>
                             </div>
                         @endforeach
